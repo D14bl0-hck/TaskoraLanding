@@ -3,20 +3,11 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
+import { useModal } from '@/components/ModalManager';
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const handleWaitlistClick = () => {
-    const element = document.getElementById('waitlist-form');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      const input = element.querySelector('input[type="email"]') as HTMLInputElement;
-      if (input) {
-        setTimeout(() => input.focus(), 500);
-      }
-    }
-  };
+  const { openModal } = useModal();
 
   const navLinks = [
     { name: 'Features', href: '#features' },
@@ -54,7 +45,7 @@ export default function Navbar() {
 
           <div className="hidden md:block">
             <button
-              onClick={handleWaitlistClick}
+              onClick={() => openModal('waitlist')}
               className="bg-[#6C47FF] hover:bg-[#5835DD] text-white px-6 py-2.5 rounded-lg font-medium transition-all duration-200 hover:scale-105"
             >
               Join Waitlist
@@ -86,7 +77,7 @@ export default function Navbar() {
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
-                handleWaitlistClick();
+                openModal('waitlist');
               }}
               className="w-full bg-[#6C47FF] hover:bg-[#5835DD] text-white px-6 py-2.5 rounded-lg font-medium transition-colors"
             >

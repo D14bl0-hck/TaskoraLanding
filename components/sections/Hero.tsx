@@ -1,8 +1,10 @@
 'use client';
 
 import { ArrowRight } from 'lucide-react';
+import { useModal } from '@/components/ModalManager';
 
 export default function Hero() {
+  const { openModal } = useModal();
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       <div className="absolute inset-0 overflow-hidden">
@@ -25,14 +27,20 @@ export default function Hero() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
-            <button className="group bg-[#6C47FF] hover:bg-[#5835DD] text-white px-8 py-4 rounded-lg font-semibold transition-all duration-200 hover:scale-105 flex items-center gap-2">
+            <button
+              onClick={() => openModal('waitlist')}
+              className="group bg-[#6C47FF] hover:bg-[#5835DD] text-white px-8 py-4 rounded-lg font-semibold transition-all duration-200 hover:scale-105 flex items-center gap-2"
+            >
               Join the Waitlist
               <ArrowRight
                 size={20}
                 className="group-hover:translate-x-1 transition-transform"
               />
             </button>
-            <button className="border border-white/20 hover:border-white/40 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-200 hover:scale-105">
+            <button
+              onClick={() => openModal('early-creator')}
+              className="border border-white/20 hover:border-white/40 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-200 hover:scale-105"
+            >
               Become an Early Creator
             </button>
           </div>
