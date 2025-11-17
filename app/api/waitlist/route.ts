@@ -17,13 +17,21 @@ export async function POST(request: Request) {
       );
     }
 
+    const normalizedEmail = email.toLowerCase().trim();
+
     const { data, error } = await supabase
       .from('waitlist')
-      .insert([{ email, created_at: new Date().toISOString() }])
+      .insert([{ email: normalizedEmail }])
       .select()
       .maybeSingle();
 
     if (error) {
+      if (error.code === '23505') {
+        return NextResponse.json(
+          { error: 'Email already on waitlist' },
+          { status: 400 }
+        );
+      }
       console.error('Supabase error:', error);
       return NextResponse.json(
         { error: 'Failed to join waitlist' },
@@ -31,7 +39,10 @@ export async function POST(request: Request) {
       );
     }
 
-    return NextResponse.json({ success: true, data }, { status: 200 });
+    return NextResponse.json(
+      { success: true, message: 'Successfully joined waitlist', data },
+      { status: 200 }
+    );
   } catch (error) {
     console.error('Server error:', error);
     return NextResponse.json(

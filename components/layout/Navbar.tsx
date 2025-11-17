@@ -2,9 +2,21 @@
 
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
+import Image from 'next/image';
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const handleWaitlistClick = () => {
+    const element = document.getElementById('waitlist-form');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      const input = element.querySelector('input[type="email"]') as HTMLInputElement;
+      if (input) {
+        setTimeout(() => input.focus(), 500);
+      }
+    }
+  };
 
   const navLinks = [
     { name: 'Features', href: '#features' },
@@ -17,8 +29,15 @@ export default function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0A0A0A]/80 backdrop-blur-xl border-b border-white/5">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
-          <div className="flex items-center">
-            <span className="text-2xl font-bold tracking-tight">Taskora</span>
+          <div className="flex items-center gap-3">
+            <Image
+              src="/ChatGPT Image Nov 16, 2025, 03_01_55 AM copy.png"
+              alt="Taskora Logo"
+              width={32}
+              height={32}
+              className="w-8 h-8 md:w-10 md:h-10"
+            />
+            <span className="text-xl md:text-2xl font-bold tracking-tight">Taskora</span>
           </div>
 
           <div className="hidden md:flex items-center space-x-8">
@@ -34,7 +53,10 @@ export default function Navbar() {
           </div>
 
           <div className="hidden md:block">
-            <button className="bg-[#6C47FF] hover:bg-[#5835DD] text-white px-6 py-2.5 rounded-lg font-medium transition-all duration-200 hover:scale-105">
+            <button
+              onClick={handleWaitlistClick}
+              className="bg-[#6C47FF] hover:bg-[#5835DD] text-white px-6 py-2.5 rounded-lg font-medium transition-all duration-200 hover:scale-105"
+            >
               Join Waitlist
             </button>
           </div>
@@ -61,7 +83,13 @@ export default function Navbar() {
                 {link.name}
               </a>
             ))}
-            <button className="w-full bg-[#6C47FF] hover:bg-[#5835DD] text-white px-6 py-2.5 rounded-lg font-medium transition-colors">
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                handleWaitlistClick();
+              }}
+              className="w-full bg-[#6C47FF] hover:bg-[#5835DD] text-white px-6 py-2.5 rounded-lg font-medium transition-colors"
+            >
               Join Waitlist
             </button>
           </div>

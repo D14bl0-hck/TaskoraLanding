@@ -19,13 +19,16 @@ export default function WaitlistCTA() {
         body: JSON.stringify({ email }),
       });
 
+      const data = await response.json();
+
       if (response.ok) {
         setStatus('success');
-        setMessage('Successfully joined the waitlist!');
+        setMessage('Successfully joined the waitlist! Check your email.');
         setEmail('');
+        setTimeout(() => setStatus('idle'), 5000);
       } else {
         setStatus('error');
-        setMessage('Something went wrong. Please try again.');
+        setMessage(data.error || 'Something went wrong. Please try again.');
       }
     } catch (error) {
       setStatus('error');
@@ -49,7 +52,7 @@ export default function WaitlistCTA() {
             Launching soon. Early creators get 0% fees for 60 days.
           </p>
 
-          <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+          <form onSubmit={handleSubmit} className="max-w-md mx-auto" id="waitlist-form">
             <div className="flex flex-col sm:flex-row gap-3">
               <input
                 type="email"
@@ -57,26 +60,29 @@ export default function WaitlistCTA() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
                 required
-                className="flex-1 px-6 py-4 rounded-lg bg-white/5 border border-white/10 focus:border-[#6C47FF] focus:outline-none transition-colors text-white placeholder:text-[#C8C8C8]"
+                disabled={status === 'loading' || status === 'success'}
+                className="flex-1 px-6 py-4 rounded-lg bg-white/5 border border-white/10 focus:border-[#6C47FF] focus:outline-none transition-colors text-white placeholder:text-[#C8C8C8] disabled:opacity-50"
               />
               <button
                 type="submit"
-                disabled={status === 'loading'}
-                className="group bg-[#6C47FF] hover:bg-[#5835DD] text-white px-6 py-4 rounded-lg font-semibold transition-all duration-200 hover:scale-105 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled={status === 'loading' || status === 'success'}
+                className="group bg-[#6C47FF] hover:bg-[#5835DD] text-white px-6 py-4 rounded-lg font-semibold transition-all duration-200 hover:scale-105 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
               >
                 {status === 'loading' ? 'Joining...' : 'Join Waitlist'}
-                <ArrowRight
-                  size={20}
-                  className="group-hover:translate-x-1 transition-transform"
-                />
+                {status !== 'loading' && (
+                  <ArrowRight
+                    size={20}
+                    className="group-hover:translate-x-1 transition-transform"
+                  />
+                )}
               </button>
             </div>
 
             {status === 'success' && (
-              <p className="mt-4 text-green-400 text-sm">{message}</p>
+              <p className="mt-4 text-green-400 text-sm font-medium">{message}</p>
             )}
             {status === 'error' && (
-              <p className="mt-4 text-red-400 text-sm">{message}</p>
+              <p className="mt-4 text-red-400 text-sm font-medium">{message}</p>
             )}
           </form>
 
