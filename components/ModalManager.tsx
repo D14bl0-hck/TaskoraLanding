@@ -1,8 +1,8 @@
 'use client';
 
 import { createContext, useContext, useState, ReactNode } from 'react';
-import WaitlistModal from './modals/WaitlistModal';
-import EarlyCreatorModal from './modals/EarlyCreatorModal';
+import WaitlistModal from '@/components/modals/WaitlistModal';
+import EarlyCreatorModal from '@/components/modals/EarlyCreatorModal';
 
 type ModalType = 'waitlist' | 'early-creator' | null;
 
