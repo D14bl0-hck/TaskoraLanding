@@ -7,7 +7,7 @@ import WaitlistCTA from '@/components/sections/WaitlistCTA';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#0A0A0A] text-white">
+    <main className="min-h-screen bg-[#0A0A0A] text-white pt-24 md:pt-32">
       <Hero />
       <ProblemSolution />
       <HowItWorks />

@@ -19,16 +19,16 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0A0A0A]/80 backdrop-blur-xl border-b border-white/5">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
+        <div className="flex items-center justify-between h-24 md:h-32">
           <div className="flex items-center gap-3">
             <Image
               src="/ChatGPT Image Nov 16, 2025, 03_01_55 AM copy.png"
               alt="Taskora Logo"
-              width={32}
-              height={32}
-              className="w-8 h-8 md:w-10 md:h-10"
+              width={80}
+              height={80}
+              className="w-20 h-20 md:w-24 md:h-24"
             />
-            <span className="text-xl md:text-2xl font-bold tracking-tight">Taskora</span>
+            <span className="text-2xl md:text-3xl font-bold tracking-tight">Taskora</span>
           </div>
 
           <div className="hidden md:flex items-center space-x-8">

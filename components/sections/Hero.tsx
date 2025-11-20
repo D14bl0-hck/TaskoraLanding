@@ -6,7 +6,7 @@ import { useModal } from '@/components/ModalManager';
 export default function Hero() {
   const { openModal } = useModal();
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] rounded-full bg-gradient-to-br from-[#6C47FF]/30 via-[#6C47FF]/10 to-transparent blur-3xl animate-pulse"></div>
         <div className="absolute top-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-gradient-to-br from-[#6C47FF]/20 to-transparent blur-3xl"></div>
